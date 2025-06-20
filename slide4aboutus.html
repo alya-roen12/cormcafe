@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Corm Cafe - About Us</title>
+	<style>
+
+	* {
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+		text-decoration: none;
+	}
+		
+	body 
+	{
+		font-family: Calibri, sans-serif;
+		background-color: #DFD2B6;
+	}
+
+	.navbar 
+	{
+		background-color: #DFD2B6;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 10px 20px;
+		border-bottom: 2px solid #8F3C15;
+		position: relative;
+	}
+		
+	.logo-area 
+	{
+		display: flex;
+		align-items: center;
+	}
+		
+	.logo-area img 
+	{
+		height: 60px;
+		margin-right: 10px;
+	}
+		
+	.logo-area span 
+	{
+		font-size: 40px;
+		font-weight: bold;
+		color: #2A211B;
+	}
+		
+	.nav-links 
+	{
+		display: flex;
+		margin-left: auto;
+		margin-right: 20px;
+	}
+		
+	.nav-links a 
+	{
+		color: #8F3C15;
+		padding: 0 35px;
+		font-weight: bold;
+		font-size: 16px;
+	}
+		
+	.menu-icon 
+	{
+		font-size: 26px;
+		cursor: pointer;
+		color: #8F3C15;
+		display: block;
+	}
+		
+	.sidebar 
+	{
+		height: 100%;
+		width: 0;
+		position: fixed;
+		top: 0;
+		right: 0;
+		background-color: #A0815D;
+		overflow-x: hidden;
+		transition: 0.3s;
+		padding-top: 60px;
+		z-index: 1000;
+	}
+
+	.sidebar a 
+	{
+		padding: 12px 25px;
+		text-decoration: none;
+		font-size: 18px;
+		color: #8F3C15;
+		display: block;
+		transition: 0.2s;
+		font-weight: bold;
+	}
+		
+	.sidebar .closebtn 
+	{
+		position: absolute;
+		top: 15px;
+		right: 20px;
+		font-size: 30px;
+		color: #2A211B;
+		cursor: pointer;
+	}
+		
+	.sidebar button 
+	{
+		background-color: black;
+		color: white;
+		border: none;
+		border-radius: 10px;
+		padding: 10px;
+		margin: 15px 25px;
+		font-size: 16px;
+		cursor: pointer;
+		width: 100px;
+	}
+
+	.top-section 
+	{
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		padding: 50px;
+		flex-wrap: wrap;
+		gap: 40px;
+	}
+		
+	.top-section .about-heading 
+	{
+		font-size: 100px;
+		color: #8F3C15;
+		font-weight: bold;
+		line-height: 1;
+	}
+		
+	.top-section img 
+	{
+		max-width: 100%;
+		border-radius: 20px;
+		border: 2px solid #8F3C15;
+		object-fit: cover;
+		max-height: 300px;
+		margin-left: 400px;
+	}
+
+	.about-container 
+	{
+		padding: 50px;
+		border-top: 2px solid #8F3C15;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		align-items: center;
+		background-color: #DFD2B6;
+	}
+
+	.about-text 
+	{
+		flex: 1;
+		padding-right: 40px;
+	}
+		
+	.about-text h1 
+	{
+		font-size: 100px;
+		color: #8F3C15;
+		line-height: 1;
+		margin-bottom: 20px;
+	}
+
+	.about-text p 
+	{
+		font-size: 18px;
+		color: #8F3C15;
+		font-weight: bold;
+		line-height: 1.6;
+	}
+
+	.about-image 
+	{
+		flex-shrink: 0;
+	}
+		
+	.about-image img 
+	{
+		width: 300px;
+		height: 300px;
+		border-radius: 50%;
+		object-fit: cover;
+	}
+
+	.about-top-image
+	{
+		width: 100%;
+		padding: 40px 50px 0;
+	}
+		
+	.about-top-image img 
+	{
+		width: 100%;
+		max-height: 300px;
+		object-fit: cover;
+		border-radius: 20px;
+		border: 2px solid #8F3C15;
+	}
+
+	@media (max-width: 768px) 
+	{
+		.about-container 
+		{
+			flex-direction: column;
+		}
+		.about-text 
+		{
+			padding-right: 0;
+		}
+		.about-image 
+		{
+			margin-top: 30px;
+		}
+	}
+
+	</style>
+</head>
+
+<body>
+	
+	<div class="navbar">
+		<div class="logo-area">
+			<img src="corm_logo.png" alt="Logo">
+			<span>Corm</span>
+		</div>
+
+		<div class="nav-links">
+			<a href="slide1.html">HOME</a>
+			<a href="slide3contactus.html">CONTACT US</a>
+			<a href="slide4aboutus.html">ABOUT US</a>
+		</div>
+
+		<div class="menu-icon" onclick="openSidebar()">&#9776;</div>
+
+		<div id="mySidebar" class="sidebar">
+			<span class="closebtn" onclick="closeSidebar()">×</span>
+			<button onclick="alert('Login clicked')">Login</button>
+			<button onclick="alert('Logout clicked')">Logout</button>
+		</div>
+	</div>
+
+
+	<div class="top-section">
+		<div class="about-heading">About<br>Us</div>
+		<img src="chill.jpg" alt="Cafe interior">
+	</div>
+
+	<div class="about-container">
+	<div class="bottom-line"></div>
+
+		<div class="about-text">
+			<p>
+				CORM Café, founded in 2014 in Jasin, Melaka by a full-time teacher turned entrepreneur, was born out of passion and purpose. 
+				The name “CORM” symbolises underground growth and quiet strength, reflecting the café’s commitment to authenticity and resilience. 
+				Originally launched as an online indie product distributor, it has evolved into more than just a cafe. Corm serves as a creative 
+				hub and community sanctuary that fosters counter-culture and intellectual exchange. With indie roots and a strong focus on originality, 
+				CORM Café began with a small, dedicated team of just three members, offering personalized service while championing a space where 
+				creativity and meaningful conversation thrive.
+			</p>
+		</div>
+
+		<div class="about-image">
+			<img src="light.jpg" alt="Team photo">
+		</div>
+	</div>
+
+	<script>
+		function openSidebar() 
+		{
+			document.getElementById("mySidebar").style.width = "250px";
+		}
+		function closeSidebar() 
+		{
+			document.getElementById("mySidebar").style.width = "0";
+		}
+	</script>
+</body>
+</html>
