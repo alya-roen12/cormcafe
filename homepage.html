@@ -61,45 +61,100 @@
     .nav-links a:hover {
       text-decoration: underline;
     }
-
-    .menu-icon {
-      display: none;
-      cursor: pointer;
-      font-size: 24px;
-    }
-
-    .sidebar {
-      height: 100%;
-      width: 0;
+ /* Off screen menu */
+    .off-screen-menu {
+      background-color:rgb(169, 135, 96);
+      height: 100vh;
+      width: 100%;
+      max-width: 300px;
       position: fixed;
-      z-index: 2;
       top: 0;
+      right: -450px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-size: 1.5rem;
+      transition: 0.3s ease;
+      z-index: 1000;
+    }
+
+    .off-screen-menu.active {
       right: 0;
-      background-color: #333;
-      overflow-x: hidden;
-      transition: 0.3s;
-      padding-top: 60px;
     }
 
-    .sidebar .closebtn {
-      position: absolute;
-      top: 20px;
-      right: 25px;
-      font-size: 36px;
+    .off-screen-menu ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .off-screen-menu li {
+      margin: 20px 0;
+    }
+
+    .off-screen-menu a {
       color: white;
-      cursor: pointer;
-    }
-
-    .sidebar button {
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px 20px;
       display: block;
-      background: none;
-      border: none;
-      color: white;
-      font-size: 18px;
-      margin: 20px;
-      cursor: pointer;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
     }
 
+    .off-screen-menu a:hover {
+      background-color: #8F3C15;
+    }
+
+    /* Hamburger menu */
+    .ham-menu {
+      height: 50px;
+      width: 50px;
+      position: relative;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    .ham-menu span {
+      height: 4px;
+      width: 100%;
+      background-color:#fbf5f2;
+      border-radius: 25px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: 0.3s ease;
+    }
+
+    .ham-menu span:nth-child(1) {
+      top: 25%;
+    }
+
+    .ham-menu span:nth-child(2) {
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .ham-menu span:nth-child(3) {
+      top: 75%;
+    }
+
+    .ham-menu.active span:nth-child(1) {
+      top: 50%;
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    .ham-menu.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .ham-menu.active span:nth-child(3) {
+      top: 50%;
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+  
     .hero {
       display: flex;
       align-items: center;
@@ -197,28 +252,32 @@
     }
   </style>
 </head>
-
-<body>
-  <div class="navbar">
-    <div class="logo-area">
-      <img src="corm_logo.png" alt="Logo">
-      <span>Corm</span>
-    </div>
-
-    <nav class="nav-links">
-      <a href="homepage.html">HOME</a>
-      <a href="slide3contactus.html">CONTACT US</a>
-      <a href="slide4aboutus.html">ABOUT US</a>
-    </nav>
-
-    <div class="menu-icon" onclick="openSidebar()">&#9776;</div>
-
-    <div id="mySidebar" class="sidebar">
-      <span class="closebtn" onclick="closeSidebar()">×</span>
-      <button onclick="alert('Login clicked')">Login</button>
-      <button onclick="alert('Logout clicked')">Logout</button>
+<div class="navbar">
+  <div class="logo-area">
+    <img src="asset/corm_logo_noword.png" alt="Logo">
+    <span>Corm</span>
+  </div>
+  
+  <div class="nav-right">
+  
+    <!-- Hamburger Menu -->
+    <div class="ham-menu">
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
   </div>
+</div>
+
+<!-- Off-screen Menu -->
+<div class="off-screen-menu">
+  <ul>
+    <li><a href="slide1.html">HOME</a></li>
+    <li><a href="slide3contactus.html">CONTACT US</a></li>
+    <li><a href="slide4aboutus.html">ABOUT US</a></li>
+    <li><a href="logout.html">LOGOUT</a></li>
+  </ul>
+</div>
 
   <main>
     <section class="hero">
@@ -226,26 +285,26 @@
         <h1>Made with love,<br>served with a smile.</h1>
         <a href="login.php" class="btn primary">SIGN IN</a>
       </div>
-      <img src="homepage.png" alt="Main Dish" class="hero-img">
+      <img src="asset/homepagee.png" alt="Main Dish" class="hero-img">
     </section>
 
     <section class="menu">
       <h2>OUR SPECIALTIES YOU MUST TRY</h2>
       <div class="menu-items">
         <div class="item">
-          <img src="matcha.jpg" alt="Matcha Latte">
+          <img src="uploads/matcha.jpg" alt="Matcha Latte">
           <p>Matcha Latte</p>
         </div>
         <div class="item">
-          <img src="cheesypasta.jpg" alt="Cheesy Pasta">
+          <img src="uploads/cheesypasta.jpg" alt="Cheesy Pasta">
           <p>Cheesy Pasta</p>
         </div>
         <div class="item">
-          <img src="brownies.jpeg" alt="Brownies">
+          <img src="uploads/brownies.jpeg" alt="Brownies">
           <p>Brownies</p>
         </div>
         <div class="item">
-          <img src="tortilla.jpg" alt="Tortilla">
+          <img src="uploads/tortilla.jpg" alt="Tortilla">
           <p>Tortilla</p>
         </div>
       </div>
@@ -253,23 +312,13 @@
   </main>
 
   <script>
-    function openSidebar() {
-      document.getElementById("mySidebar").style.width = "250px";
-    }
-
-    function closeSidebar() {
-      document.getElementById("mySidebar").style.width = "0";
-    }
-
-    window.addEventListener('click', function (event) {
-      const sidebar = document.getElementById('mySidebar');
-      const menuIcon = document.querySelector('.menu-icon');
-
-      if (event.target !== menuIcon && !menuIcon.contains(event.target) &&
-        event.target !== sidebar && !sidebar.contains(event.target)) {
-        closeSidebar();
-      }
-    });
+    const hamMenu = document.querySelector('.ham-menu');
+  const offScreenMenu = document.querySelector('.off-screen-menu');
+  
+  hamMenu.addEventListener('click', () => {
+    hamMenu.classList.toggle('active');
+    offScreenMenu.classList.toggle('active');
+  });
   </script>
 </body>
 
