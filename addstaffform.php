@@ -1,6 +1,13 @@
+
 <?php
+session_start(); // Start session for AdminID
+if (!isset($_SESSION['AdminID'])) {
+  // Redirect if admin not logged in
+  echo "<script>alert('Please login as admin first.'); window.location.href='adminlogin.php';</script>";
+  exit();
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $id = $_POST['StaffID'];
   $name = $_POST['StaffName'];
   $phone = $_POST['StaffPhoneNum'];
   $email = $_POST['StaffEmail'];
@@ -11,18 +18,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $state = $_POST['StaffState'];
   $position = $_POST['StaffPosition'];
   $dob = $_POST['StaffDOB'];
+  $admin_id = $_SESSION['AdminID']; // Get AdminID from session
 
   $dbc = mysqli_connect("localhost", "root", "", "corm");
   if (mysqli_connect_errno()) {
     echo "<script>alert('Failed to connect to MySQL: " . mysqli_connect_error() . "');</script>";
   } else {
-    $sql = "INSERT INTO staff (StaffID, StaffName, StaffPhoneNum, StaffEmail, StaffPassword, StaffHouseNum, StaffPostcode, StaffCity, StaffState, StaffPosition, StaffDOB) 
-            VALUES ('$id', '$name', '$phone', '$email', '$password', '$house', '$city', '$postcode', '$state', '$position', '$dob')";
+    $sql = "INSERT INTO staff 
+            (StaffName, StaffPhoneNum, StaffEmail, StaffPassword, StaffHouseNum, StaffPostcode, StaffCity, StaffState, StaffPosition, StaffDOB, AdminID) 
+            VALUES 
+            ('$name', '$phone', '$email', '$password', '$house', '$city', '$postcode', '$state', '$position', '$dob', '$admin_id')";
+    
     $result = mysqli_query($dbc, $sql);
     if ($result) {
-      echo "<script>alert('Staff record added successfully.'); window.location.href='addstaffform.php';</script>";
+      echo "<script>alert('Staff record added successfully.'); window.location.href='slide9editstaffhomepage.php';</script>";
     } else {
-      echo "<script>alert('Error adding staff record.');</script>";
+      echo "<script>alert('Error adding staff record: " . mysqli_error($dbc) . "');</script>";
     }
   }
 }
@@ -41,13 +52,137 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     .logo-area { display: flex; align-items: center; }
     .logo-area img { height: 60px; margin-right: 10px; }
     .logo-area span { font-size: 40px; font-weight: bold; color: #2A211B; }
-    .nav-links { display: flex; margin-left: auto; margin-right: 20px; }
-    .nav-links a { color: #8F3C15; padding: 0 35px; font-weight: bold; font-size: 16px; }
-    .menu-icon { font-size: 26px; cursor: pointer; color: #8F3C15; display: block; }
-    .sidebar { height: 100%; width: 0; position: fixed; top: 0; right: 0; background-color: #A0815D; overflow-x: hidden; transition: 0.3s; padding-top: 60px; z-index: 1000; }
-    .sidebar a { padding: 12px 25px; text-decoration: none; font-size: 18px; color: #8F3C15; display: block; transition: 0.2s; font-weight: bold; }
-    .sidebar .closebtn { position: absolute; top: 15px; right: 20px; font-size: 30px; color: #2A211B; cursor: pointer; }
-    .sidebar button { background-color: black; color: white; border: none; border-radius: 10px; padding: 10px; margin: 15px 25px; font-size: 16px; cursor: pointer; width: 100px; }
+    
+    .navbar .logo-area span {
+      margin: 0;
+      font-size: 1.8rem;
+      font-weight: bold;
+      color:rgb(17, 16, 16);
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #dfd2b6;
+      padding: 15px 30px;
+      color: white;
+    }
+
+     .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    .customer-link {
+      color: #8f3c15;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      position: relative;
+      left:-50px;
+    }
+    
+    .customer-link:hover {
+      color:rgb(44, 28, 21);
+    }
+
+     /* Hamburger menu */
+    .ham-menu {
+      height: 50px;
+      width: 50px;
+      position: relative;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    .ham-menu span {
+      height: 4px;
+      width: 100%;
+      background-color: #8f3c15;
+      border-radius: 25px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: 0.3s ease;
+    }
+
+    .ham-menu span:nth-child(1) {
+      top: 25%;
+    }
+
+    .ham-menu span:nth-child(2) {
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .ham-menu span:nth-child(3) {
+      top: 75%;
+    }
+
+    .ham-menu.active span:nth-child(1) {
+      top: 50%;
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    .ham-menu.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .ham-menu.active span:nth-child(3) {
+      top: 50%;
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+
+    /* Off screen menu */
+    .off-screen-menu {
+      background-color: rgb(169, 135, 96);
+      height: 100vh;
+      width: 100%;
+      max-width: 300px;
+      position: fixed;
+      top: 0;
+      right: -300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-size: 1.2rem;
+      transition: 0.3s ease;
+      z-index: 1000;
+    }
+
+    .off-screen-menu.active {
+      right: 0;
+    }
+
+    .off-screen-menu ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .off-screen-menu li {
+      margin: 20px 0;
+    }
+
+    .off-screen-menu a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 15px 30px;
+      display: block;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    .off-screen-menu a:hover {
+      background-color: #8F3C15;
+    }
     .banner { width: 100%; height: 300px; background: url('homepage.png') no-repeat center center; background-size: cover; }
     .main-content { display: flex; justify-content: center; align-items: center; padding: 50px 20px; }
     .form-container { background-color: #fff; padding: 40px; border-radius: 20px; max-width: 600px; width: 100%; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
@@ -64,23 +199,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   </style>
 </head>
 <body>
-  <div class="navbar">
-    <div class="logo-area">
-      <img src="corm_logo.png" alt="Logo">
-      <span>Corm</span>
-    </div>
-    <div class="nav-links">
-      <a href="slide1.html">HOME</a>
-      <a href="slide3contactus.html">CONTACT US</a>
-      <a href="slide4aboutus.html">ABOUT US</a>
-    </div>
-    <div class="menu-icon" onclick="openSidebar()">&#9776;</div>
-    <div id="mySidebar" class="sidebar">
-      <span class="closebtn" onclick="closeSidebar()">×</span>
-      <button onclick="alert('Login clicked')">Login</button>
-      <button onclick="alert('Logout clicked')">Logout</button>
+
+<!-- Header/Navbar -->
+<div class="navbar">
+  <div class="logo-area">
+    <img src="asset/corm_logo_noword.png" alt="Corm Logo">
+    <span>Corm</span>
+  </div>
+  
+  <div class="nav-right">
+    <a href="" class="customer-link">ADMIN</a>
+    <!-- Hamburger Menu -->
+    <div class="ham-menu">
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
   </div>
+</div>
+
+<!-- Off-screen Menu -->
+<div class="off-screen-menu">
+  <ul>
+    <li><a href="slide1.html">HOME</a></li>
+    <li><a href="slide3contactus.html">CONTACT US</a></li>
+    <li><a href="slide4aboutus.html">ABOUT US</a></li>
+    <li><a href="homepageaftersignin.php">LOGOUT</a></li>
+  </ul>
+</div>
 
   <div class="banner"></div>
 
@@ -88,7 +234,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="form-container">
       <h2>ADD STAFF</h2>
       <form method="POST" action="">
-        <input class="form-input" name="StaffID" type="text" placeholder="Staff ID" required />
         <input class="form-input" name="StaffName" type="text" placeholder="Staff Name" required />
         <input class="form-input" name="StaffPhoneNum" type="tel" placeholder="Phone Number" required />
         <input class="form-input" name="StaffEmail" type="email" placeholder="Email" required />
@@ -161,7 +306,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input class="form-input" name="StaffDOB" type="date" required />
 
         <div class="button-container">
-          <button class="btn-cancel" type="button" onclick="window.location.href='slide1.html'">CANCEL</button>
+          <button class="btn-cancel" type="button" onclick="window.location.href='slide9editstaffhomepage.php'">BACK</button>
           <button class="btn-create" type="submit">ADD STAFF</button>
         </div>
       </form>
@@ -169,13 +314,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   </div>
 
   <script>
-    function openSidebar() {
-      document.getElementById("mySidebar").style.width = "250px";
-    }
-    function closeSidebar() {
-      document.getElementById("mySidebar").style.width = "0";
-    }
+    const hamMenu = document.querySelector('.ham-menu');
+const offScreenMenu = document.querySelector('.off-screen-menu');
 
+hamMenu.addEventListener('click', () => {
+  hamMenu.classList.toggle('active');
+  offScreenMenu.classList.toggle('active');
+});
     const cityToPostcode = {
       'Kuala Lumpur': '50000', 'Petaling Jaya': '46000', 'Shah Alam': '40000',
       'Subang Jaya': '47500', 'Seremban': '70300', 'Nilai': '71800',
