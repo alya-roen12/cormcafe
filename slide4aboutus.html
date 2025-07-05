@@ -1,14 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Corm Cafe | Made with Love</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Corm Cafe - About Us</title>
+	<style>
 
-  <style>
-      body {
+	       body {
       font-family: Calibri, sans-serif;
       background-color: #f3e7d3;
       margin: 0;
@@ -152,102 +150,117 @@
     }
 
   
-    .hero {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 60px 80px;
-      background-color: rgba(255, 243, 232, 0.9);
-      flex-wrap: wrap;
-      border-radius: 15px;
-      margin: 30px;
-    }
 
-    .hero-text {
-      max-width: 500px;
-    }
+	.top-section 
+	{
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		padding: 50px;
+		flex-wrap: wrap;
+		gap: 40px;
+	}
+		
+	.top-section .about-heading 
+	{
+		font-size: 100px;
+		color: #472816;
+		font-weight: bold;
+		line-height: 1;
+	}
+		
+	.top-section img 
+	{
+		width: 100%;
+		max-width: 600px;
+		height: auto;
+		border-radius: 20px;
+		border: 2px solid #8F3C15;
+		object-fit: cover;
+		position: relative;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+	
+	.about-container 
+	{
+		padding: 50px;
+		border-top: 2px solid #8F3C15;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		align-items: center;
+		background-color: #DFD2B6;
+	}
 
-    .hero-text h1 {
-      font-size: 2.8em;
-      color: #8F3C15;
-      margin-bottom: 25px;
-    }
+	.about-text 
+	{
+		flex: 1;
+		padding-right: 40px;
+	}
+		
+	.about-text h1 
+	{
+		font-size: 100px;
+		color: #8F3C15;
+		line-height: 1;
+		margin-bottom: 20px;
+	}
 
-    .btn.primary {
-      background-color: #8F3C15;
-      color: white;
-      padding: 12px 25px;
-      border: none;
-      border-radius: 25px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 16px;
-    }
+	.about-text p 
+	{
+		font-size: 18px;
+		color:  #472816;
+		font-weight: bold;
+		line-height: 1.6;
+	}
 
-    .hero-img {
-      max-width: 500px;
-      height: auto;
-      border-radius: 15px;
-    }
+	.about-image 
+	{
+		flex-shrink: 0;
+	}
+		
+	.about-image img 
+	{
+		width: 300px;
+		height: 300px;
+		border-radius: 50%;
+		object-fit: cover;
+	}
 
-    .menu {
-      padding: 40px 60px;
-      background-color: rgba(253, 240, 230, 0.95);
-      margin: 30px;
-      border-radius: 15px;
-    }
+	.about-top-image
+	{
+		width: 100%;
+		padding: 40px 50px 0;
+	}
+		
+	.about-top-image img 
+	{
+		width: 100%;
+		max-height: 300px;
+		object-fit: cover;
+		border-radius: 20px;
+		border: 2px solid #8F3C15;
+	}
 
-    .menu h2 {
-      text-align: center;
-      color: #8F3C15;
-      font-size: 28px;
-      margin-bottom: 35px;
-    }
+	@media (max-width: 768px) 
+	{
+		.about-container 
+		{
+			flex-direction: column;
+		}
+		.about-text 
+		{
+			padding-right: 0;
+		}
+		.about-image 
+		{
+			margin-top: 30px;
+		}
+	}
 
-    .menu-items {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 25px;
-    }
-
-    .menu-items .item {
-      text-align: center;
-    }
-
-    .menu-items .item img {
-      width: 200px;
-      height: 150px;
-      border-radius: 10px;
-    }
-
-    .menu-items .item p {
-      margin-top: 10px;
-      font-weight: bold;
-      font-size: 16px;
-      color: #5c2d13;
-    }
-
-    @media (max-width: 768px) {
-      .hero {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .hero-img {
-        margin-top: 30px;
-        max-width: 80%;
-      }
-
-      .menu-icon {
-        display: block;
-      }
-
-      .nav-links {
-        display: none;
-      }
-    }
-  </style>
+	</style>
+<body>
 </head>
 <div class="navbar">
   <div class="logo-area">
@@ -276,47 +289,45 @@
   </ul>
 </div>
 
-  <main>
-    <section class="hero">
-      <div class="hero-text">
-        <h1>Made with love,<br>served with a smile.</h1>
-        <a href="login.php" class="btn primary">SIGN IN</a>
-      </div>
-      <img src="asset/homepagee.png" alt="Main Dish" class="hero-img">
-    </section>
 
-    <section class="menu">
-      <h2>OUR SPECIALTIES YOU MUST TRY</h2>
-      <div class="menu-items">
-        <div class="item">
-          <img src="uploads/matcha.jpg" alt="Matcha Latte">
-          <p>Matcha Latte</p>
-        </div>
-        <div class="item">
-          <img src="uploads/cheesypasta.jpg" alt="Cheesy Pasta">
-          <p>Cheesy Pasta</p>
-        </div>
-        <div class="item">
-          <img src="uploads/brownies.jpeg" alt="Brownies">
-          <p>Brownies</p>
-        </div>
-        <div class="item">
-          <img src="uploads/tortilla.jpg" alt="Tortilla">
-          <p>Tortilla</p>
-        </div>
-      </div>
-    </section>
-  </main>
+	<div class="top-section">
+		<div class="about-heading">About<br>Us</div>
+		<img src="img/interior.jpg" alt="Cafe interior">
+	</div>
 
-  <script>
-    const hamMenu = document.querySelector('.ham-menu');
+	<div class="about-container">
+	<div class="bottom-line"></div>
+
+		<div class="about-text">
+			<p>
+				CORM Café, founded in 2014 in Jasin, Melaka by a full-time teacher turned entrepreneur, was born out of passion and purpose. 
+				The name “CORM” symbolises underground growth and quiet strength, reflecting the café’s commitment to authenticity and resilience. 
+				Originally launched as an online indie product distributor, it has evolved into more than just a cafe. Corm serves as a creative 
+				hub and community sanctuary that fosters counter-culture and intellectual exchange. With indie roots and a strong focus on originality, 
+				CORM Café began with a small, dedicated team of just three members, offering personalized service while championing a space where 
+				creativity and meaningful conversation thrive.
+			</p>
+		</div>
+
+		<div class="about-image">
+			<img src="img/light.jpg" alt="Team photo">
+		</div>
+	</div>
+
+<script>
+  const hamMenu = document.querySelector('.ham-menu');
   const offScreenMenu = document.querySelector('.off-screen-menu');
   
   hamMenu.addEventListener('click', () => {
     hamMenu.classList.toggle('active');
     offScreenMenu.classList.toggle('active');
   });
-  </script>
+ 
+  function handleBack() {
+    if (confirm("Are you sure you want to go back? All your cart data will be lost.")) {
+      window.location.href = "clear_cart_and_redirect.php";
+    }
+  }
+</script>
 </body>
-
 </html>
