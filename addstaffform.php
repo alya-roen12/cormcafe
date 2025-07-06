@@ -180,11 +180,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       transition: background-color 0.3s ease;
     }
 
+       
+    .background {
+      width: 100%;
+      height: 300px;
+      overflow: hidden;
+    }
+
+    .bg-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      border: 2px solid #8f3c15; 
+    }
+
+
     .off-screen-menu a:hover {
       background-color: #8F3C15;
     }
     .banner { width: 100%; height: 300px; background: url('homepage.png') no-repeat center center; background-size: cover; }
-    .main-content { display: flex; justify-content: center; align-items: center; padding: 50px 20px; }
+   .main-content { display: flex; justify-content: center; align-items: center; padding: 30px 30px; top: -250px; position: relative; }
     .form-container { background-color: #fff; padding: 40px; border-radius: 20px; max-width: 600px; width: 100%; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
     .form-container h2 { color: #6f2c10; margin-bottom: 30px; font-size: 32px; text-align: center; }
     .form-input, .form-select { width: 100%; padding: 15px 20px; margin-bottom: 20px; border-radius: 10px; border: 1px solid #ccc; font-size: 16px; }
@@ -227,6 +244,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <li><a href="homepageaftersignin.php">LOGOUT</a></li>
   </ul>
 </div>
+
+ <div class="background"> 
+      <img src="asset/bg-food 1.jpg" alt="bg food" class="bg-image">
+    </div>
+
 
   <div class="banner"></div>
 

@@ -400,26 +400,26 @@ unset($_SESSION['toast']);
         <h1>Made with love,<br>served with a smile.</h1>
         <a href="menu_list.php" class="btn primary">RESERVE NOW</a>
       </div>
-      <img src="homepage.png" alt="Main Dish" class="hero-img">
+      <img src="asset/homepagee.png" alt="Main Dish" class="hero-img">
     </section>
 
     <section class="menu">
       <h2>OUR SPECIALTIES YOU MUST TRY</h2>
       <div class="menu-items">
         <div class="item">
-          <img src="matcha.jpg" alt="Matcha Latte">
+          <img src="uploads/matcha.jpg" alt="Matcha Latte">
           <p>Matcha Latte</p>
         </div>
         <div class="item">
-          <img src="cheesypasta.jpg" alt="Cheesy Pasta">
+          <img src="uploads/cheesypasta.jpg" alt="Cheesy Pasta">
           <p>Cheesy Pasta</p>
         </div>
         <div class="item">
-          <img src="brownies.jpeg" alt="Brownies">
+          <img src="uploads/brownies.jpeg" alt="Brownies">
           <p>Brownies</p>
         </div>
         <div class="item">
-          <img src="tortilla.jpg" alt="Tortilla">
+          <img src="uploads/tortilla.jpg" alt="Tortilla">
           <p>Tortilla</p>
         </div>
       </div>

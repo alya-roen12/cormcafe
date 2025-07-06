@@ -20,25 +20,20 @@ if ($filter === 'weekly') {
     $where_clause = "WHERE RDate = CURDATE()";
 }
 
-$sql = "SELECT r.RDate, SUM(o.Price * o.Quantity) AS total
+$sql = "SELECT r.ReservationID, r.ReservationName, r.RDate, SUM(o.Price * o.Quantity) AS total
         FROM reservation r
         JOIN order_items o ON r.ReservationID = o.ReservationID
         $where_clause
-        GROUP BY r.RDate
-        ORDER BY r.RDate ASC";
+        GROUP BY r.ReservationID";
 
 $result = $conn->query($sql);
 
 $total_sales = 0;
-$daily_sales = [];
-$labels = [];
-$data = [];
+$orders = [];
 
 if ($result && $result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $daily_sales[] = $row;
-        $labels[] = $row['RDate'];
-        $data[] = round($row['total'], 2);
+        $orders[] = $row;
         $total_sales += $row['total'];
     }
 }
@@ -47,9 +42,8 @@ if ($result && $result->num_rows > 0) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Admin - View Sales</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
       font-family: Calibri, sans-serif;
@@ -58,7 +52,7 @@ if ($result && $result->num_rows > 0) {
       margin: 0;
     }
     .container {
-      max-width: 1000px;
+      max-width: 900px;
       margin: auto;
       background: #fff;
       border-radius: 16px;
@@ -94,27 +88,6 @@ if ($result && $result->num_rows > 0) {
       margin-top: 20px;
       font-size: 18px;
     }
-    .back-button {
-      text-align: center;
-      margin-top: 40px;
-    }
-    .back-button a {
-      display: inline-block;
-      padding: 12px 28px;
-      background-color: #8F3C15;
-      color: white;
-      text-decoration: none;
-      border-radius: 30px;
-      font-size: 16px;
-      font-weight: bold;
-      transition: background-color 0.3s;
-    }
-    .back-button a:hover {
-      background-color: #6b3e26;
-    }
-    #chart-container {
-      margin-top: 40px;
-    }
   </style>
 </head>
 <body>
@@ -130,65 +103,27 @@ if ($result && $result->num_rows > 0) {
       </select>
     </form>
 
-    <?php if (!empty($daily_sales)): ?>
+    <?php if (!empty($orders)): ?>
     <table>
       <tr>
+        <th>Reservation ID</th>
+        <th>Name</th>
         <th>Date</th>
-        <th>Total Sales (RM)</th>
+        <th>Total (RM)</th>
       </tr>
-      <?php foreach ($daily_sales as $day): ?>
+      <?php foreach ($orders as $order): ?>
       <tr>
-        <td><?= $day['RDate'] ?></td>
-        <td>RM <?= number_format($day['total'], 2) ?></td>
+        <td><?= $order['ReservationID'] ?></td>
+        <td><?= htmlspecialchars($order['ReservationName']) ?></td>
+        <td><?= $order['RDate'] ?></td>
+        <td>RM <?= number_format($order['total'], 2) ?></td>
       </tr>
       <?php endforeach; ?>
     </table>
     <p class="total">Total Sales: RM <?= number_format($total_sales, 2) ?></p>
-
-    <div id="chart-container">
-      <canvas id="salesChart"></canvas>
-    </div>
-
-    <script>
-      const ctx = document.getElementById('salesChart').getContext('2d');
-      const salesChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: <?= json_encode($labels) ?>,
-          datasets: [{
-            label: 'Total Sales (RM)',
-            data: <?= json_encode($data) ?>,
-            backgroundColor: '#8F3C15'
-          }]
-        },
-        options: {
-          responsive: true,
-          scales: {
-            y: {
-              beginAtZero: true,
-              title: {
-                display: true,
-                text: 'RM'
-              }
-            },
-            x: {
-              title: {
-                display: true,
-                text: 'Date'
-              }
-            }
-          }
-        }
-      });
-    </script>
-
     <?php else: ?>
     <p style="text-align: center;">No sales records found for <?= htmlspecialchars($title) ?>.</p>
     <?php endif; ?>
-
-    <div class="back-button">
-      <a href="slide8adminhomepage.php">&larr; Back to Homepage</a>
-    </div>
   </div>
 </body>
 </html>

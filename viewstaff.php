@@ -226,6 +226,21 @@
       margin: 2px;
     }
 
+      .background {
+      width: 100%;
+      height: 300px;
+      overflow: hidden;
+    }
+
+    .bg-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      border: 2px solid #8f3c15; 
+    }
+
     .btn:hover {
       background-color: #a14d25;
     }
@@ -278,6 +293,10 @@
     <li><a href="homepageaftersignin.php">LOGOUT</a></li>
   </ul>
 </div>
+
+<div class="background"> 
+      <img src="asset/bg-food 1.jpg" alt="bg food" class="bg-image">
+    </div>
 
 
 <div class="container">

@@ -172,6 +172,20 @@
       background-color: #8F3C15;
     }
 
+     .background {
+      width: 100%;
+      height: 300px;
+      overflow: hidden;
+    }
+
+    .bg-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      border: 2px solid #8f3c15; 
+    }
 
     .banner {
       width: 100%;
@@ -187,16 +201,21 @@
       padding: 10px;
     }
 
-    .main-text {
+     .main-text {
       font-size: 50px;
       font-weight: bold;
       color: #8F3C15;
       max-width: 400px;
       margin-right: 30px;
+      top: -180px;
+      position: relative;
     }
 
-    .admin-panel {
+
+   .admin-panel {
       text-align: center;
+      position: relative;
+      top: -250px;
     }
 
     .admin-logo img {
@@ -223,10 +242,6 @@
       cursor: pointer;
       width: 200px;
     }
-
-    .admin-panel button:hover {
-      background-color: #8F3C15;
-    }
   </style>
 </head>
 <body>
@@ -238,7 +253,7 @@
   </div>
   
   <div class="nav-right">
-    <a href="" class="customer-link">STAFF</a>
+    <a href="" class="customer-link">ADMIN</a>
     <!-- Hamburger Menu -->
     <div class="ham-menu">
       <span></span>
@@ -258,6 +273,10 @@
   </ul>
 </div>
 
+  <div class="background"> 
+      <img src="asset/bg-food 1.jpg" alt="bg food" class="bg-image">
+    </div>
+
 
   <div class="banner"></div>
 
@@ -268,7 +287,7 @@
     </div>
     <div class="admin-panel">
       <div class="admin-logo">
-        <img src="corm_logo.png" alt="Corm Logo">
+        <img src="asset/corm_logo_noword.png" alt="Corm Logo">
       </div>
       <h2>Corm</h2>
       <button onclick="window.location.href='addstaffform.php'">ADD STAFF</button>
