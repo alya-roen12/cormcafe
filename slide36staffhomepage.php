@@ -19,9 +19,9 @@
     .navbar {
       background-color: #DFD2B6;
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
       align-items: center;
-      padding: 10px 20px;
+      padding: 15px 30px;
       border-bottom: 2px solid #8F3C15;
     }
 
@@ -31,15 +31,6 @@
       font-size: 1.8rem;
       font-weight: bold;
       color:rgb(17, 16, 16);
-    }
-
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #dfd2b6;
-      padding: 15px 30px;
-      color: white;
     }
 
      .nav-right {
@@ -55,8 +46,6 @@
       font-size: 16px;
       text-transform: uppercase;
       letter-spacing: 1px;
-      position: relative;
-      left:-50px;
     }
     
     .customer-link:hover {
@@ -165,6 +154,8 @@
     .logo-area img {
       height: 60px;
       margin-right: 10px;
+      
+
     }
 
     .logo-area span {
@@ -212,6 +203,8 @@
       font-weight: bold;
       color: #8F3C15;
       max-width: 400px; margin-right: 30px;
+      position: relative;
+      top: -150px;
     }
 
     .admin-panel {
@@ -221,12 +214,16 @@
     .admin-logo img {
       width: 100px;
       margin-bottom: 10px;
+      position: relative;
+      top: -200px;
     }
 
     .admin-panel h2 {
       font-size: 28px;
       margin-bottom: 30px;
       color: #2A211B;
+      position: relative;
+      top: -210px;
     }
 
     .admin-panel button {
@@ -241,7 +238,26 @@
       font-weight: bold;
       cursor: pointer;
       width: 200px;
+      position: relative;
+      top:-215px;
+      
     }
+
+        .background {
+      width: 100%;
+      height: 300px;
+      overflow: hidden;
+    }
+
+    .bg-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      border: 2px solid #8f3c15; 
+    }
+
   </style>
 </head>
 <body>
@@ -274,6 +290,11 @@
   </ul>
 </div>
 
+
+    <div class="background"> 
+      <img src="asset/bg-food 1.jpg" alt="bg food" class="bg-image">
+    </div>
+
   <div class="banner"></div>
 
   <div class="main-section">
@@ -283,7 +304,7 @@
     </div>
     <div class="admin-panel">
       <div class="admin-logo">
-        <img src="corm_logo.png" alt="Corm Logo">
+        <img src="asset/corm_logo_noword.png" alt="Corm Logo">
       </div>
       <h2>Corm</h2>
       <button onclick="window.location.href='menu_overview.php'">VIEW MENU AVAILABILITY</button>

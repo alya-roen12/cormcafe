@@ -309,6 +309,7 @@ if (!$data) {
   <div class="background"> 
     <img src="asset/bg-food 1.jpg" alt="bg food" class="bg-image">
   </div>
+  
 
   <form method="POST">
     <h2>Update Staff</h2>

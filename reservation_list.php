@@ -25,6 +25,17 @@ $result = mysqli_query($dbc, $query);
       color: #3b2f2f;
     }
 
+
+    
+    .main-container {
+      width: 100%;
+      max-width: 100vw;
+      margin: 0 auto;
+      background-color: #dfd2b6;
+      min-height: 100vh;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+ 
     .navbar {
       display: flex;
       justify-content: space-between;
@@ -256,10 +267,25 @@ $result = mysqli_query($dbc, $query);
       transition: background-color 0.3s;
     }
 
+
     .back-button a:hover {
       background-color: #6b3e26;
     }
 
+    .background {
+      width: 100%;
+      height: 300px;
+      overflow: hidden;
+    }
+
+    .bg-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      border: 2px solid #8f3c15; 
+    }
     /* Responsive adjustments */
     @media (max-width: 768px) {
       .navbar {
@@ -305,7 +331,7 @@ $result = mysqli_query($dbc, $query);
   </div>
   
   <div class="nav-right">
-    <a href="" class="customer-link">CUSTOMER</a>
+    <a href="" class="customer-link">STAFF</a>
     <!-- Hamburger Menu -->
     <div class="ham-menu">
       <span></span>
@@ -324,6 +350,11 @@ $result = mysqli_query($dbc, $query);
     <li><a href="homepageaftersignin.php">LOGOUT</a></li>
   </ul>
 </div>
+
+ <div class="background"> 
+      <img src="asset/bg-food 1.jpg" alt="bg food" class="bg-image">
+    </div>
+
   <div class="container">
     <h2>All Reservation Details</h2>
 

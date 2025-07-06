@@ -330,13 +330,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   <script>
 
-const hamMenu = document.querySelector('.ham-menu');
-const offScreenMenu = document.querySelector('.off-screen-menu');
+    const hamMenu = document.querySelector('.ham-menu');
+    const offScreenMenu = document.querySelector('.off-screen-menu');
 
-hamMenu.addEventListener('click', () => {
+  hamMenu.addEventListener('click', () => {
   hamMenu.classList.toggle('active');
   offScreenMenu.classList.toggle('active');
 });
+    function openSidebar() {
+      document.getElementById("mySidebar").style.width = "250px";
+    }
+    function closeSidebar() {
+      document.getElementById("mySidebar").style.width = "0";
+    }
   </script>
 </body>
 </html>
