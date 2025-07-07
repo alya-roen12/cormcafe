@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Corm Cafe - About Us</title>
+	<style>
+
+	       body {
+      font-family: Calibri, sans-serif;
+      background-color: #f3e7d3;
+      margin: 0;
+      padding: 0;
+    }
+    .navbar {
+      background-color: #DFD2B6;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      border-bottom: 2px solid #8F3C15;
+    }
+    
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    .customer-link {
+      color: #8f3c15;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      position: relative;
+      left:-50px;
+    }
+    
+    .customer-link:hover {
+      color:rgb(44, 28, 21);
+    }
+    .logo-area {
+      display: flex;
+      align-items: center;
+    }
+    .logo-area img {
+      height: 60px;
+      margin-right: 12px;
+    }
+    .logo-area span {
+      font-size: 36px;
+      font-weight: bold;
+      color: #2A211B;
+    }
+
+    /* Off screen menu */
+    .off-screen-menu {
+      background-color:rgb(169, 135, 96);
+      height: 100vh;
+      width: 100%;
+      max-width: 300px;
+      position: fixed;
+      top: 0;
+      right: -450px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-size: 1.5rem;
+      transition: 0.3s ease;
+      z-index: 1000;
+    }
+
+    .off-screen-menu.active {
+      right: 0;
+    }
+
+    .off-screen-menu ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .off-screen-menu li {
+      margin: 20px 0;
+    }
+
+    .off-screen-menu a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px 20px;
+      display: block;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    .off-screen-menu a:hover {
+      background-color: #8F3C15;
+    }
+
+    /* Hamburger menu */
+    .ham-menu {
+      height: 50px;
+      width: 50px;
+      position: relative;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    .ham-menu span {
+      height: 4px;
+      width: 100%;
+      background-color:#8f3c15;
+      border-radius: 25px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: 0.3s ease;
+    }
+
+    .ham-menu span:nth-child(1) {
+      top: 25%;
+    }
+
+    .ham-menu span:nth-child(2) {
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .ham-menu span:nth-child(3) {
+      top: 75%;
+    }
+
+    .ham-menu.active span:nth-child(1) {
+      top: 50%;
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    .ham-menu.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .ham-menu.active span:nth-child(3) {
+      top: 50%;
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+
+  
+
+	.top-section 
+	{
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		padding: 50px;
+		flex-wrap: wrap;
+		gap: 40px;
+	}
+		
+	.top-section .about-heading 
+	{
+		font-size: 100px;
+		color: #472816;
+		font-weight: bold;
+		line-height: 1;
+	}
+		
+	.top-section img 
+	{
+		width: 100%;
+		max-width: 600px;
+		height: auto;
+		border-radius: 20px;
+		border: 2px solid #8F3C15;
+		object-fit: cover;
+		position: relative;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+	
+	.about-container 
+	{
+		padding: 50px;
+		border-top: 2px solid #8F3C15;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		align-items: center;
+		background-color: #DFD2B6;
+	}
+
+	.about-text 
+	{
+		flex: 1;
+		padding-right: 40px;
+	}
+		
+	.about-text h1 
+	{
+		font-size: 100px;
+		color: #8F3C15;
+		line-height: 1;
+		margin-bottom: 20px;
+	}
+
+	.about-text p 
+	{
+		font-size: 18px;
+		color:  #472816;
+		font-weight: bold;
+		line-height: 1.6;
+	}
+
+	.about-image 
+	{
+		flex-shrink: 0;
+	}
+		
+	.about-image img 
+	{
+		width: 300px;
+		height: 300px;
+		border-radius: 50%;
+		object-fit: cover;
+	}
+
+	.about-top-image
+	{
+		width: 100%;
+		padding: 40px 50px 0;
+	}
+		
+	.about-top-image img 
+	{
+		width: 100%;
+		max-height: 300px;
+		object-fit: cover;
+		border-radius: 20px;
+		border: 2px solid #8F3C15;
+	}
+
+	@media (max-width: 768px) 
+	{
+		.about-container 
+		{
+			flex-direction: column;
+		}
+		.about-text 
+		{
+			padding-right: 0;
+		}
+		.about-image 
+		{
+			margin-top: 30px;
+		}
+	}
+
+	</style>
+<body>
+</head>
+<div class="navbar">
+  <div class="logo-area">
+    <img src="asset/corm_logo_noword.png" alt="Logo">
+    <span>Corm</span>
+  </div>
+  
+  <div class="nav-right">
+  
+    <!-- Hamburger Menu -->
+    <div class="ham-menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+
+<!-- Off-screen Menu -->
+<div class="off-screen-menu">
+  <ul>
+    <li><a href="slide1.html">HOME</a></li>
+    <li><a href="slide3contactus.html">CONTACT US</a></li>
+    <li><a href="slide4aboutus.html">ABOUT US</a></li>
+    <li><a href="logout.html">LOGOUT</a></li>
+  </ul>
+</div>
+
+
+	<div class="top-section">
+		<div class="about-heading">About<br>Us</div>
+		<img src="img/interior.jpg" alt="Cafe interior">
+	</div>
+
+	<div class="about-container">
+	<div class="bottom-line"></div>
+
+		<div class="about-text">
+			<p>
+				CORM Café, founded in 2014 in Jasin, Melaka by a full-time teacher turned entrepreneur, was born out of passion and purpose. 
+				The name “CORM” symbolises underground growth and quiet strength, reflecting the café’s commitment to authenticity and resilience. 
+				Originally launched as an online indie product distributor, it has evolved into more than just a cafe. Corm serves as a creative 
+				hub and community sanctuary that fosters counter-culture and intellectual exchange. With indie roots and a strong focus on originality, 
+				CORM Café began with a small, dedicated team of just three members, offering personalized service while championing a space where 
+				creativity and meaningful conversation thrive.
+			</p>
+		</div>
+
+		<div class="about-image">
+			<img src="img/light.jpg" alt="Team photo">
+		</div>
+	</div>
+
+<script>
+  const hamMenu = document.querySelector('.ham-menu');
+  const offScreenMenu = document.querySelector('.off-screen-menu');
+  
+  hamMenu.addEventListener('click', () => {
+    hamMenu.classList.toggle('active');
+    offScreenMenu.classList.toggle('active');
+  });
+ 
+  function handleBack() {
+    if (confirm("Are you sure you want to go back? All your cart data will be lost.")) {
+      window.location.href = "clear_cart_and_redirect.php";
+    }
+  }
+</script>
+</body>
+</html>

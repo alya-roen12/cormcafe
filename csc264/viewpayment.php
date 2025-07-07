@@ -8,49 +8,24 @@ if ($conn->connect_error) {
 
 // Handle search functionality
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';
-$dateFrom = isset($_GET['date_from']) ? trim($_GET['date_from']) : '';
-$dateTo = isset($_GET['date_to']) ? trim($_GET['date_to']) : '';
+$searchCondition = '';
+$searchValue = '';
 
-$searchConditions = [];
-$searchParams = [];
-$paramTypes = '';
-
-// Add Customer ID search condition
 if (!empty($search)) {
-    $searchConditions[] = "CustID LIKE ?";
-    $searchParams[] = "%" . $search . "%";
-    $paramTypes .= 's';
-}
-
-// Add date range search conditions
-if (!empty($dateFrom)) {
-    $searchConditions[] = "PaymentDate >= ?";
-    $searchParams[] = $dateFrom;
-    $paramTypes .= 's';
-}
-
-if (!empty($dateTo)) {
-    $searchConditions[] = "PaymentDate <= ?";
-    $searchParams[] = $dateTo;
-    $paramTypes .= 's';
-}
-
-// Build WHERE clause
-$whereClause = '';
-if (!empty($searchConditions)) {
-    $whereClause = "WHERE " . implode(" AND ", $searchConditions);
+    $searchCondition = "WHERE CustID LIKE ?";
+    $searchValue = "%" . $search . "%";
 }
 
 // Prepare SQL query
 $sql = "SELECT PaymentID, CustID, ReservationID, PaymentMethod, PaymentTotal, PaymentDate, OrderID 
         FROM payment 
-        $whereClause 
+        $searchCondition 
         ORDER BY PaymentDate DESC";
 
 $stmt = $conn->prepare($sql);
 
-if (!empty($searchParams)) {
-    $stmt->bind_param($paramTypes, ...$searchParams);
+if (!empty($search)) {
+    $stmt->bind_param("s", $searchValue);
 }
 
 $stmt->execute();
@@ -271,28 +246,11 @@ $result = $stmt->get_result();
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
-
-    .search-container {
-      display: flex;
-      gap: 15px;
-      align-items: center;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .search-form {
-      display: flex;
-      gap: 15px;
-      align-items: center;
-      flex-wrap: wrap;
     }
 
     .search-box {
       position: relative;
-      width: 200px;
+      width: 300px;
     }
 
     .search-box input {
@@ -303,9 +261,6 @@ $result = $stmt->get_result();
       font-size: 14px;
       transition: all 0.3s ease;
       background-color: #f9f9f9;
-       /* Add these properties to adjust position */
-      position: relative;
-      top: 9px; /* Adjust this value: negative moves up, positive moves down */
     }
 
     .search-box input:focus {
@@ -315,86 +270,6 @@ $result = $stmt->get_result();
       box-shadow: 0 0 10px rgba(143, 60, 21, 0.2);
     }
 
-    .date-input {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .date-input label {
-      font-size: 12px;
-      color: #8f3c15;
-      font-weight: 600;
-      text-transform: uppercase;
-    }
-
-    .date-input input {
-      padding: 10px 12px;
-      border: 2px solid #e0e0e0;
-      border-radius: 8px;
-      font-size: 13px;
-      transition: all 0.3s ease;
-      background-color: #f9f9f9;
-      width: 130px;
-     
-    }
-.date-input input {
-      padding: 10px 12px;
-      border: 2px solid #e0e0e0;
-      border-radius: 8px;
-      font-size: 13px;
-      transition: all 0.3s ease;
-      background-color: #f9f9f9;
-      width: 130px;
-    }
-    .date-input input:focus {
-      outline: none;
-      border-color: #8F3C15;
-      background-color: white;
-      box-shadow: 0 0 10px rgba(143, 60, 21, 0.2);
-    }
-
-    .search-buttons {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .search-btn, .clear-btn {
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-         /* Add these properties to adjust position */
-      position: relative;
-      top: 9px; /* Adjust this value: negative moves up, positive moves down */
-    }
-
-    .search-btn {
-      background-color: #8F3C15;
-      color: white;
-    }
-
-    .search-btn:hover {
-      background-color: #7a3314;
-      transform: translateY(-2px);
-    }
-
-    .clear-btn {
-      background-color: #6c757d;
-      color: white;
-    }
-
-    .clear-btn:hover {
-      background-color: #5a6268;
-      transform: translateY(-2px);
-    }
 
     .table-container {
       background: #f7f7f7;
@@ -478,16 +353,16 @@ $result = $stmt->get_result();
     }
 
     .search-box img {
-      position: absolute;
-      height: 20px;
-      width: 20px;
-      right: 15px;
-      top: 70%;
-      transform: translateY(-50%);
-      pointer-events: none;
-      border: none;
-      object-fit: contain;
-    }
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  border: none;
+  object-fit: contain;
+}
 
     .result-info {
       padding: 15px;
@@ -533,17 +408,6 @@ $result = $stmt->get_result();
         gap: 15px;
       }
       
-      .search-container {
-        width: 100%;
-        justify-content: center;
-      }
-      
-      .search-form {
-        flex-direction: column;
-        gap: 15px;
-        width: 100%;
-      }
-      
       .search-box {
         width: 100%;
         max-width: 300px;
@@ -586,19 +450,6 @@ $result = $stmt->get_result();
       .search-box input {
         padding: 10px 35px 10px 12px;
         font-size: 13px;
-      }
-      
-      .search-form {
-        flex-direction: column;
-        gap: 15px;
-      }
-      
-      .date-input {
-        width: 100%;
-      }
-      
-      .date-input input {
-        width: 100%;
       }
       
       th, td {
@@ -649,34 +500,13 @@ $result = $stmt->get_result();
     <div class="content-area">
       <div class="payment-header">
         PAYMENT
-        <div class="search-container">
-          <form method="GET" action="" class="search-form">
-            <div class="search-box">
-              <input type="text" 
-                     name="search" 
-                     placeholder="Customer ID" 
-                     value="<?php echo htmlspecialchars($search); ?>">
-              <img src="search-icon.png" alt="search icon">
-            </div>
-            
-            <div class="date-input">
-              <label>From</label>
-              <input type="date" 
-                     name="date_from" 
-                     value="<?php echo htmlspecialchars($dateFrom); ?>">
-            </div>
-            
-            <div class="date-input">
-              <label>To</label>
-              <input type="date" 
-                     name="date_to" 
-                     value="<?php echo htmlspecialchars($dateTo); ?>">
-            </div>
-            
-            <div class="search-buttons">
-              <button type="submit" class="search-btn">Search</button>
-              <button type="button" class="clear-btn" onclick="clearSearch()">Clear</button>
-            </div>
+        <div class="search-box">
+          <form method="GET" action="">
+            <input type="text" 
+                   name="search" 
+                   placeholder="Search by Customer ID" 
+                   value="<?php echo htmlspecialchars($search); ?>">
+                 <img src="search-icon.png" alt="search icon" >
           </form>
         </div>
       </div>
@@ -710,19 +540,8 @@ $result = $stmt->get_result();
                 }
             } else {
                 echo "<tr><td colspan='7' class='no-records'>";
-                $searchCriteria = [];
                 if (!empty($search)) {
-                    $searchCriteria[] = "Customer ID: '" . htmlspecialchars($search) . "'";
-                }
-                if (!empty($dateFrom)) {
-                    $searchCriteria[] = "From: " . htmlspecialchars($dateFrom);
-                }
-                if (!empty($dateTo)) {
-                    $searchCriteria[] = "To: " . htmlspecialchars($dateTo);
-                }
-                
-                if (!empty($searchCriteria)) {
-                    echo "No payment records found for " . implode(", ", $searchCriteria);
+                    echo "No payment records found for Customer ID: '" . htmlspecialchars($search) . "'";
                 } else {
                     echo "No payment records found";
                 }
@@ -736,20 +555,8 @@ $result = $stmt->get_result();
         <div class="result-info">
           <?php 
           $totalRecords = $result->num_rows;
-          $searchCriteria = [];
-          
           if (!empty($search)) {
-              $searchCriteria[] = "Customer ID: '" . htmlspecialchars($search) . "'";
-          }
-          if (!empty($dateFrom)) {
-              $searchCriteria[] = "From: " . htmlspecialchars($dateFrom);
-          }
-          if (!empty($dateTo)) {
-              $searchCriteria[] = "To: " . htmlspecialchars($dateTo);
-          }
-          
-          if (!empty($searchCriteria)) {
-              echo "Found $totalRecords record(s) for " . implode(", ", $searchCriteria) . " | ";
+              echo "Found $totalRecords record(s) for Customer ID: '" . htmlspecialchars($search) . "' | ";
               echo "<a href='" . $_SERVER['PHP_SELF'] . "'>Show All Records</a>";
           } else {
               echo "Showing $totalRecords total payment record(s)";
@@ -772,7 +579,7 @@ hamMenu.addEventListener('click', () => {
     // Enhanced search functionality
     document.addEventListener('DOMContentLoaded', function() {
       const searchInput = document.querySelector('.search-box input');
-      const searchForm = document.querySelector('.search-form');
+      const searchForm = document.querySelector('.search-box form');
       
       // Submit form on Enter key
       searchInput.addEventListener('keypress', function(e) {
@@ -781,17 +588,6 @@ hamMenu.addEventListener('click', () => {
         }
       });
     });
-    
-    // Clear search function
-    function clearSearch() {
-      // Clear all form inputs
-      document.querySelector('input[name="search"]').value = '';
-      document.querySelector('input[name="date_from"]').value = '';
-      document.querySelector('input[name="date_to"]').value = '';
-      
-      // Submit form to show all records
-      document.querySelector('.search-form').submit();
-    }
   </script>
 </body>
 </html>

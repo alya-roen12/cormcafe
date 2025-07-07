@@ -1,0 +1,175 @@
+/*
+/* body */
+/*
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #dfd2b6;
+}
+
+.container {
+  display: flex;
+  width: 850px;
+  height: 550px;
+  border-style: solid;
+  border-width: 1px;
+  background-color: #a34f27;
+}
+
+.Form-box h1 {
+  position: absolute;
+  text-align: left;
+  top: 150px;
+  left: 53%;
+  transform: translateX(-50%);
+  font-size: 50px !important;
+  color: #8f3c15;
+}
+
+.Form-box {
+  right: 0;
+  width: 60%;
+  height: 100%;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  color: #000000;
+  text-align: left;
+}
+
+form {
+  width: 100%;
+}
+
+.container h1 {
+  font-size: 41px;
+  margin: 10px;
+}
+
+.input-box {
+  bottom: -10px;
+  font-size: 17px;
+  position: relative;
+  margin: 20px;
+}
+
+.input-box input {
+  width: 100%;
+  font-size: 15px;
+  padding: 13px;
+  background-color: #ffffff;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+}
+
+/*choose your roles*/
+.choose-box label {
+  font-size: 16px;
+  margin: 25px;
+  accent-color: #232323;
+}
+
+/* Hide buttons by default */
+.button {
+  display: none;
+}
+
+/* Customer buttons (centered) */
+.button.customer {
+  position: absolute;
+  top: 2000px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  display: flex;
+  gap: 15px;
+}
+
+/* Staff and Admin buttons (positioned to the right) */
+.button.staff-admin {
+  position: absolute;
+  top: 320px;
+  right: 30px;
+  text-align: center;
+}
+
+.button button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #000000;
+  color: #e7e2e2;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button button:hover {
+  background-color: #6d6060;
+}
+
+.left-panel {
+  width: 40%;
+  height: 100%;
+  background-color: #a34f27;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.logo {
+  width: 119%;
+  display: flex;
+  justify-content: center;
+  padding-left: 10px;
+  position: relative;
+  top: -50px;
+}
+
+.logo-img {
+  max-width: 100px;
+  height: auto;
+}
+
+.logo h1 {
+  font-size: 55px;
+  text-align: center;
+  color: #2a211b;
+}
+
+.user {
+  width: 119%;
+  display: flex;
+  justify-content: center;
+  padding-left: 10px;
+  position: relative;
+  top: -30px;
+}
+
+.user-img {
+  max-width: 400px;
+  height: auto;
+}
+
+.user h1 {
+  position: absolute;
+  bottom: -80px;
+  left: 49%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: #000000;
+  font-size: 43.5px;
+}
+
+/*
